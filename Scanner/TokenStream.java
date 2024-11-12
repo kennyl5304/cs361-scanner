@@ -76,6 +76,13 @@ public class TokenStream {
 			// TODO TO BE COMPLETED WHERE NEEDED
 			case '<':
 				// <=
+				nextChar = readChar();
+				if(nextChar == '=') {
+					t.setValue(t.getValue() + nextChar);
+				} else {
+					t.setType("Other");
+				}
+				return t;
 			case '>':
 				// >=
 			case '=':
@@ -190,8 +197,17 @@ public class TokenStream {
 	}
 
 	private boolean isKeyword(String s) {
-		// TODO TO BE COMPLETED 
-		return false;
+		switch (s) {
+			case "bool":
+			case "if":
+			case "else":
+			case "integer":
+			case "main":
+			case "while":
+				return true;
+			default:
+				return false;
+		}
 	}
 
 	private boolean isWhiteSpace(char c) {
@@ -214,16 +230,34 @@ public class TokenStream {
 	}
 
 	private boolean isSeparator(char c) {
-		// TODO TO BE COMPLETED
-		//return (c == "(" || c == ")" || c == "{" || c == "}" || c == ";" || c == ",");
-		return false;
+		switch (c) {
+			case '(':
+			case ')':
+			case '{':
+			case '}':
+			case ';':
+			case '.':
+				return true;
+			default:
+				return false;
+		}
 	}
 
 	private boolean isOperator(char c) {
-		// Checks for characters that start operators
-		// TODO TO BE COMPLETED
-
-		return false;
+		switch (c) {
+			case '+':
+			case '-':
+			case '*':
+			case '/':
+			case '<':
+			case '=':
+			case '!':
+			case '&':
+			case '|':
+				return true;
+			default:
+				return false;
+		}
 	}
 
 	private boolean isLetter(char c) {
