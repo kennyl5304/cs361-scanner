@@ -133,7 +133,6 @@ public class TokenStream {
 					t.setType("Other");
 				}
 				return t;
-
 			case '&':
 				// Look or &&
 				nextChar = readChar();
@@ -144,7 +143,15 @@ public class TokenStream {
 				} else {
 					t.setType("Other");
 				}
-
+				return t;
+			case ':':
+				nextChar = readChar();
+				if(nextChar == '=') {
+					t.setValue(t.getValue() + nextChar);
+					nextChar = readChar();
+				} else {
+					t.setType("Other");
+				}
 				return t;
 
 			default: // all other operators
@@ -158,11 +165,6 @@ public class TokenStream {
 			t.setType("Separator");
 			t.setValue(t.getValue() + nextChar);
 			// TODO TO BE COMPLETED
-			switch(nextChar){
-				case '(':
-				case '{':
-				default:
-			}
 			nextChar = readChar();
 			return t;
 			
@@ -297,6 +299,7 @@ public class TokenStream {
 			case '!':
 			case '&':
 			case '|':
+			case ':':
 				return true;
 			default:
 				return false;
