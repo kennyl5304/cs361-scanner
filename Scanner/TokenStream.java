@@ -146,7 +146,16 @@ public class TokenStream {
 				}
 
 				return t;
-
+			case ':':
+				nextChar = readChar();
+				if (nextChar == '=') {
+					t.setValue(t.getValue() + nextChar);
+					nextChar = readChar();
+					return t;
+				} else {
+					t.setType("Other");
+				}
+				return t;
 			default: // all other operators
 				nextChar = readChar();
 				return t;
@@ -297,6 +306,7 @@ public class TokenStream {
 			case '!':
 			case '&':
 			case '|':
+			case ':':
 				return true;
 			default:
 				return false;
