@@ -236,6 +236,7 @@ public class TokenStream {
 	}
 
 	private boolean isKeyword(String s) {
+		// TODO TO BE COMPLETED
 		switch (s) {
 			case "bool":
 			case "if":
@@ -269,6 +270,7 @@ public class TokenStream {
 	}
 
 	private boolean isSeparator(char c) {
+		// TODO TO BE COMPLETED
 		switch (c) {
 			case '(':
 			case ')':
@@ -283,6 +285,8 @@ public class TokenStream {
 	}
 
 	private boolean isOperator(char c) {
+		// Checks for characters that start operators
+		// TODO TO BE COMPLETED
 		switch (c) {
 			case '+':
 			case '-':
