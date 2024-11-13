@@ -59,14 +59,11 @@ public class TokenStream {
 				// TODO TO BE COMPLETED
 				// look for <cr>, <lf>, <ff>
 
-				// add to value cause why not
-				t.setValue(t.getValue() + nextChar);
-				while(!isEndOfLine(nextChar)) {
-					t.setValue(t.getValue() + readChar());
+				while(!isEndOfLine(nextChar) && !isEndofFile()) {
+					nextChar = readChar();
 				}
+				nextChar = readChar();
 
-				t.setType("Comment");
-				return t;
 			} else {
 				// A slash followed by anything else must be an operator.
 				t.setValue("/");

@@ -6,7 +6,7 @@
 public class ScannerDemo {
 
 	// This needs to be changed !
-	private static String file1 = "C:\\Users\\Kenny Luong\\Documents\\GitHub\\cs361-scanner\\Scanner\\prog1.kay";
+	private static String file1 = "Java Assignment/cs361-scanner/Scanner/prog1.kay";
 	private static int counter = 1;
 
 	public static void main(String args[]) {
