@@ -93,11 +93,30 @@ public class TokenStream {
 				return t;
 			case '>':
 				// >=
+				nextChar = readChar();
+				if(nextChar == '=') {
+					t.setValue(t.getValue() + nextChar);
+				} else {
+					t.setType("Other");
+				}
+				return t;
 			case '=':
 				// ==
+				nextChar = readChar();
+				if(nextChar == '=') {
+					t.setValue(t.getValue() + nextChar);
+				} else {
+					t.setType("Other");
+				}
+				return t;
 			case '!':
 				// !=
 				nextChar = readChar();
+				if(nextChar == '=') {
+					t.setValue(t.getValue() + nextChar);
+				} else {
+					t.setType("Other");
+				}
 				return t;
 			case '|':
 				// Look for ||
@@ -133,8 +152,16 @@ public class TokenStream {
 		// Then check for a separator
 		if (isSeparator(nextChar)) {
 			t.setType("Separator");
+			t.setValue(t.getValue() + nextChar);
 			// TODO TO BE COMPLETED
+			switch(nextChar){
+				case '(':
+				case '{':
+				default:
+			}
+			nextChar = readChar();
 			return t;
+			
 		}
 
 		// Then check for an identifier, keyword, or literal.
