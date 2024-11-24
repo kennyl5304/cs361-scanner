@@ -51,6 +51,8 @@ public class ConcreteSyntax {
 		for (int i = 0; i < header.length; i++)
 			// bypass " main { "
 			match(header[i]);
+
+		
 		return p;
 	}
 
@@ -58,8 +60,7 @@ public class ConcreteSyntax {
 		// TODO TO BE COMPLETED 
 		// Declarations --> { Declaration }*
 		Declarations ds = new Declarations();
-		while (token.getValue().equals("int")
-				|| token.getValue().equals("bool")) {
+		while (token.getValue().equals("int") || token.getValue().equals("bool")) {
 			declaration(ds);
 		}
 		return ds;
@@ -126,8 +127,10 @@ public class ConcreteSyntax {
 		else if (token.getValue().equals("while")) {
 			// WhileStatement
 			// TODO TO BE COMPLETED
+			s = whileStatement();
 		} else if (token.getType().equals("Identifier")) { // Assignment
 			// TODO TO BE COMPLETED
+			s = assignment();
 		} else
 			throw new RuntimeException(SyntaxError("Statement"));
 		return s;
@@ -147,6 +150,14 @@ public class ConcreteSyntax {
 		Assignment a = new Assignment();
 		if (token.getType().equals("Identifier")) {
 			// TODO TO BE COMPLETED
+
+			Variable v = new Variable();
+			v.id = token.getValue();
+			a.target = v;
+			Expression e;
+			e = expression();
+			a.source = e;
+
 		} else
 			throw new RuntimeException(SyntaxError("Identifier"));
 		return a;
@@ -176,6 +187,12 @@ public class ConcreteSyntax {
 		while (token.getValue().equals("&&")) {
 			b = new Binary();
 			// TODO TO BE COMPLETED
+			
+			b.term1 = e;
+			b.op = new Operator(token.getValue());
+			token = input.nextToken();
+			b.term2 = relation();
+
 			e = b;
 		}
 		return e;
@@ -268,6 +285,17 @@ public class ConcreteSyntax {
 		// IfStatement --> if ( Expression ) Statement { else Statement }opt
 		Conditional c = new Conditional();
 		// TODO TO BE COMPLETED
+
+		Expression e = expression();
+		c.test = e;
+		Statement then = statement();
+		c.thenbranch = then;
+		c.elsebranch = null;
+		if(token.getValue().equals("else")){
+			Statement elseStatement = statement();
+			c.elsebranch = elseStatement;
+		}
+
 		return c;
 	}
 
@@ -275,6 +303,12 @@ public class ConcreteSyntax {
 		// WhileStatement --> while ( Expression ) Statement
 		Loop l = new Loop();
 		// TODO TO BE COMPLETED
+
+		Expression e = expression();
+		Statement body = statement();
+		l.test = e;
+		l.body = body;
+
 		return l;
 	}
 

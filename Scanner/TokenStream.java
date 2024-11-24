@@ -59,17 +59,18 @@ public class TokenStream {
 				// TODO TO BE COMPLETED
 				// look for <cr>, <lf>, <ff>
 
-				while(!isEndOfLine(nextChar) && !isEndofFile()) {
+				// add to value cause why not
+					while(!isEndOfLine(nextChar)) {
+						nextChar = readChar();
+					}
 					nextChar = readChar();
-				}
-				nextChar = readChar();
-
 			} else {
 				// A slash followed by anything else must be an operator.
 				t.setValue("/");
 				t.setType("Operator");
 				return t;
 			}
+			nextChar = readChar();
 		}
 
 		// Then check for an operator; this part of the code should recover 2-character
@@ -86,7 +87,7 @@ public class TokenStream {
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
 				} else {
-					t.setType("Other");
+					t.setValue(t.getValue());
 				}
 				return t;
 			case '>':
@@ -96,7 +97,7 @@ public class TokenStream {
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
 				} else {
-					t.setType("Other");
+					t.setValue(t.getValue());
 				}
 				return t;
 			case '=':
@@ -116,7 +117,7 @@ public class TokenStream {
 					t.setValue(t.getValue() + nextChar);
 					nextChar = readChar();
 				} else {
-					t.setType("Other");
+					t.setValue(t.getValue());
 				}
 				return t;
 			case '|':
@@ -276,7 +277,7 @@ public class TokenStream {
 			case '{':
 			case '}':
 			case ';':
-			case '.':
+			case ',':
 				return true;
 			default:
 				return false;
@@ -292,6 +293,7 @@ public class TokenStream {
 			case '*':
 			case '/':
 			case '<':
+			case '>':
 			case '=':
 			case '!':
 			case '&':
