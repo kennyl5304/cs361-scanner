@@ -316,6 +316,8 @@ public class ConcreteSyntax {
 		Conditional c = new Conditional();
 		// TODO TO BE COMPLETED
 
+		// The { } are not part of the grammar but part of the EBNF instead
+
 		match("(");
 		Expression e = expression();
 		match(")");
