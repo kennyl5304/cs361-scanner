@@ -4,8 +4,7 @@ public class ParserDemo {
 
 		// TO COMPLETE
 		// Change the path!
-		TokenStream tStream = new TokenStream("C:\\Users\\\\Kenny Luong\\\\Documents\\\\GitHub\\\\cs361-scanner\\\\Scanner\\\\prog02.kay");
-
+		TokenStream tStream = new TokenStream("Scanner/prog02.kay");
 		ConcreteSyntax cSyntax = new ConcreteSyntax(tStream);
 		Program p = cSyntax.program();
 		System.out.println(p.display());
