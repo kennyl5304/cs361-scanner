@@ -2,3 +2,22 @@ main{
 integer i;
 i := 7;
 }
+
+main{
+bool b1;
+bool b2;
+b1 := True;
+if (b1) 
+{ b2 := True;} 
+else 
+{b2 := False;}
+}
+
+main{
+integer i;
+integer n;
+n :=10;
+while(i < n){
+i := i + 1;
+}
+}
